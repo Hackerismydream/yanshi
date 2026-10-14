@@ -1,0 +1,10 @@
+materials/
+vendor-skills/
+*.tgz
+.DS_Store
+# 未采用的 logo 草图与缩略图
+design/images/logo-a.png
+design/images/logo-b.png
+design/images/logo-c.png
+design/images/logo-v2-*.png
+!design/images/logo-v2-2.png
