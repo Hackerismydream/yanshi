@@ -1,6 +1,0 @@
-interface:
-  display_name: "偃师 · 拆收益"
-  short_description: "这几个优化，到底哪个有用"
-  brand_color: "#365667"
-policy:
-  allow_implicit_invocation: false

@@ -1,53 +1,46 @@
-# yanshi v1.0
+# yanshi v1.1
 
-Everyday AI development habits: shortest useful path, independent thinking shortcuts, contract-grounded evidence, and project-local lessons. This is an author-use build; real host sessions are not yet validated.
+Everyday AI development habits: shortest useful path, manual thinking shortcuts, contract-grounded evidence, and project-local lessons. Practices come from the author's article and E2E post; real session examples are still being collected (see CONTRIBUTING.md).
 
 ## Install
 
-Requires Node >= 22.20 for the skills CLI.
-Local, unpublished package (from its root):
-npx skills add . --skill '*' -g -a codex -a claude-code
-Published repository:
-npx skills add Hackerismydream/yanshi --skill '*' -g -a codex -a claude-code
+Skills CLI (requires Node >= 22.20):
+npx skills add Hackerismydream/yanshi -g -a codex -y
+npx skills add Hackerismydream/yanshi -g -a claude-code -y
 
-Remote installation uses the published revision, not a local ZIP.
 Without Node, Python >= 3.10:
+git clone https://github.com/Hackerismydream/yanshi && cd yanshi
 python3 scripts/setup.py install --host both
-Only add --apply after reviewing the plan. Existing destinations cause refusal.
+Add --apply after reviewing the plan. Existing destinations cause refusal; add --update to back them up to ~/.yanshi-backup/<timestamp>/ and replace only skills listed in skills.json.
 
 ## Names
 
-- yanshi: Use yanshi to move this forward; what should we do next?
-- yanshi-think: Help me think this through before coding
-- yanshi-build: Build this and check it when you are done
-- yanshi-debug: Why is this failing? Help me debug it
-- yanshi-check: Check this before I submit it; does it actually work?
-- yanshi-handoff: Prepare a handoff for the next session
-- yanshi-retro: Capture what went wrong and save the lesson in this project
-- yanshi-first: Start from first principles, not the proposed solution
-- yanshi-challenge: Challenge this plan; find a counterexample
-- yanshi-trim: Cut the unnecessary complexity
-- yanshi-ablate: Which of these changes actually helped?
-- yanshi-boundary: Check the responsibility boundaries; do not split just to split
+- yanshi-think: Help me think this through before coding (automatic or by name)
+- yanshi-debug: Why is this failing? Help me debug it (automatic or by name)
+- yanshi-check: Check this before I submit it; does it actually work? (automatic or by name; read-only by default)
+- yanshi-handoff: Prepare a handoff for the next session (automatic or by name)
+- yanshi-retro: Capture what went wrong and save the lesson in this project (automatic or by name)
+- yanshi-build: Build this and self-test it (manual only)
+- yanshi: Use yanshi to move this forward; what should we do next? (manual only)
+- yanshi-ask: first | challenge | trim | ablate | boundary thinking shortcuts (manual only)
 
-The entry chooses one current moment, not a pipeline. Each non-router skill stands alone. Five thinking shortcuts are manual-only in both hosts. Use $name in Codex and /name in Claude Code. Preserve project authorization; a read-only request does not authorize edits.
+Use $name in Codex and /name in Claude Code, e.g. /yanshi-ask challenge this plan. The router picks one current moment, not a pipeline. A read-only request does not authorize edits.
 
 ## Project memory
 
-Each skill reads the target project's .yanshi/INDEX.md if present and only relevant active practices. No index does not trigger file creation. Retro saves only on a request to persist; missing evidence stays candidate, stale lessons become retired. Do not write into installed skills.
+Project-facing skills read the target project's .yanshi/INDEX.md if present and only matching active practices. Retro saves only on a request to persist; missing evidence stays candidate, stale lessons become retired.
 
-Opt-in new-session integration, from the target project root:
-python3 /actual/package/path/scripts/setup.py project --project .
-Preview first; --apply adds bounded blocks to the effective root Codex instruction file and CLAUDE.md. Do not overwrite existing instructions. New sessions must be tested for actual reads; file setup is not proof of model compliance.
+Opt-in new-session integration, from the clone:
+python3 scripts/setup.py project --project <your-project-root>
+Preview first; --apply creates the index, adds bounded blocks to the root Codex instruction file and CLAUDE.md, and adds .yanshi/HANDOFF.md and .yanshi/evidence/ to the project's .gitignore.
 
 ## Validation
 
 python3 scripts/check.py --self-test
-Read verification.md for actual results and docs/codex-task.md for the local host task.
-Read docs/author-practices.md for supported author statements; missing cases are not invented.
+verification.md lists what the checks cover. docs/author-practices.md holds the author's exact quotes; real examples are mostly still empty.
 
 ## Migration
 
-Use CHANGELOG.md. Replace obsolete yanshi directories deliberately; do not clear unrelated skills or user project memory. Do not create a tag, push, or claim a release without authorization.
+See CHANGELOG.md.
 
 https://github.com/Hackerismydream/yanshi

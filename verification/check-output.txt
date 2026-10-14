@@ -1,9 +1,13 @@
+$ python3 scripts/check.py --self-test
+PASS required files, frontmatter, sidecars, skills.json, links, project-context copies, model names
 test_both_installs_byte_identical (test_setup.SetupTest.test_both_installs_byte_identical) ... ok
 test_concurrent_edit_refused_before_writes (test_setup.SetupTest.test_concurrent_edit_refused_before_writes) ... ok
 test_damaged_managed_block_refuses_all (test_setup.SetupTest.test_damaged_managed_block_refuses_all) ... ok
 test_dangling_symlink_refused (test_setup.SetupTest.test_dangling_symlink_refused) ... ok
 test_empty_override_falls_back (test_setup.SetupTest.test_empty_override_falls_back) ... ok
 test_existing_index_not_overwritten (test_setup.SetupTest.test_existing_index_not_overwritten) ... ok
+test_gitignore_entries_added_once (test_setup.SetupTest.test_gitignore_entries_added_once) ... ok
+test_index_comes_from_retro_template (test_setup.SetupTest.test_index_comes_from_retro_template) ... ok
 test_install_failure_rolls_back (test_setup.SetupTest.test_install_failure_rolls_back) ... ok
 test_install_preview_has_no_writes (test_setup.SetupTest.test_install_preview_has_no_writes) ... ok
 test_late_host_collision_prevents_early_copy (test_setup.SetupTest.test_late_host_collision_prevents_early_copy) ... ok
@@ -16,29 +20,11 @@ test_project_preview_has_no_writes (test_setup.SetupTest.test_project_preview_ha
 test_project_rollback_after_io_error (test_setup.SetupTest.test_project_rollback_after_io_error) ... ok
 test_project_symlink_refused (test_setup.SetupTest.test_project_symlink_refused) ... ok
 test_repeat_install_refused (test_setup.SetupTest.test_repeat_install_refused) ... ok
+test_update_backs_up_and_replaces (test_setup.SetupTest.test_update_backs_up_and_replaces) ... ok
+test_update_failure_restores_originals (test_setup.SetupTest.test_update_failure_restores_originals) ... ok
+test_update_refuses_symlink (test_setup.SetupTest.test_update_refuses_symlink) ... ok
 
 ----------------------------------------------------------------------
-Ran 18 tests in 1.473s
+Ran 23 tests
 
 OK
-PASS package, bilingual catalog, host policies, references, source quote mapping, preserved logos
-PASS detect: runtime label
-PASS detect: numbered label
-PASS detect: double punctuation
-PASS detect: damaged sentence
-PASS detect: missing local link
-PASS detect: invented sibling
-PASS detect: proprietary invocation
-PASS detect: missing project reference
-PASS detect: wrong skill name
-PASS detect: wrong manual flag
-PASS detect: wrong sidecar
-PASS detect: stale README
-PASS detect: Node requirement
-PASS detect: unclosed fence
-PASS detect: divergent context
-PASS detect: missing four-part field
-PASS detect: unknown image
-PASS detect: source quote changed
-PASS mutation checks: 18
-Scope: packaging and setup only; host model sessions and business outcomes are not established.

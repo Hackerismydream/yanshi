@@ -1,0 +1,6 @@
+interface:
+  display_name: "偃师 · 小命令"
+  short_description: "first / challenge / trim / ablate / boundary"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: false

@@ -1,42 +1,28 @@
 # 验证记录
 
-日期：2026-10-14。产品版本 1.0.0；交付状态为作者自用验证版，不等于宿主或业务效果已验证。
+版本 1.1.0。仓库共 57 个 git 跟踪文件（`git ls-files | wc -l`）：8 个 Skill、2 张 README Logo，其余为文本与脚本。
 
-## 本次实际执行
+## 可复现的检查
 
 ```bash
 python3 scripts/check.py --self-test
 ```
 
-交付包含 71 个文件：69 个文本文件、2 张沿用的 128 像素 Logo；12 个 Skill。SKILL.md 为 13–25 行（含 frontmatter），不是要求依次执行的 12 个阶段。
+`check.py` 只做结构校验：
 
-| 项目 | 实际结果 |
+| 检查 | 内容 |
 |---|---|
-| 目录、名称、双语触发、安装文档与版本 | 通过 |
-| 12 个 frontmatter 和 12 个 sidecar | 窄格式检查通过；另用 YAML 解析器独立核对通过 |
-| 日常入口 / 手动快捷键的双宿主策略 | 文件级配置一致；不代表真实触发已测 |
-| 内部引用、单独安装所需资料与围栏 | 通过 |
-| 12 份项目读取约定 | 字节相同 |
-| 运行时来源噪声、旧编号与专有调用语句 | 扫描零命中 |
-| 作者引语 | 13/13 在生成时与已上传材料逐字匹配；不是仅与本包抄本自比 |
-| 故障注入 | 18/18 被检查器检出 |
-| 安装与项目接入脚本单元测试 | 18/18 通过，使用临时 HOME / 项目 |
-| 双宿主目录复制 | 24 个 Skill 目录与源文件逐字节相同 |
-| 同名、悬空链接、后一个宿主的目标冲突 | 拒绝覆盖；未先复制前一个宿主的文件 |
-| 项目入口写入 | 保留原正文、优先非空 override、重复执行不重复追加、保留已有索引 |
-| 项目写入异常与并发变更 | 已覆盖测试条件下拒绝或回滚；不声明通用文件事务隔离 |
-| MIT | 与提供的 v3 LICENSE 字节一致 |
-| 两张 Logo | 与既有 Git blob SHA 一致，未重新生成或改像素 |
-| 最终 ZIP | 文件集合和逐文件字节与源目录一致；解压后重跑完整检查通过 |
+| 必需文件 | README、CHANGELOG、CONTRIBUTING、docs、scripts 等存在 |
+| 目录与目录表 | `skills/` 下的目录与 `skills.json` 一一对应，版本与 `VERSION` 一致 |
+| frontmatter 与 sidecar | 名称与目录一致、描述含中英文；`skills.json` 的 `implicit`、frontmatter 的 `disable-model-invocation`、`agents/openai.yaml` 的 `allow_implicit_invocation` 三处一致 |
+| 链接 | Markdown 与 llms.txt 中的本地链接和图片都能解析；非总控 Skill 不链接自身目录以外的文件（保证单独安装可用） |
+| 项目读取约定 | 各 `project-context.md` 副本字节相同 |
+| 文档同步 | README、README_CN、llms.txt、docs/usage.md 都列出全部 Skill |
+| 模型名 | 文本中没有写死的模型型号 |
+| 引语 | `docs/author-practices.md` 包含 `docs/source-excerpts.json` 中的每段引语（两者互相比对，不代表与外部原文重新核对） |
 
-原始包检查与脚本测试输出见 [check-output.txt](verification/check-output.txt)。源引语核对使用已提供的 bundle，不将原始输入包重新分发。Logo 原文件的 Git blob 分别为 `280655e979e8503a99495084db3dd17eafb9028f` 和 `5f59805ff19c572ab8642fc66a67e6cdc5184801`。
+`--self-test` 另跑 `scripts/test_setup.py`，在临时 HOME / 项目目录里测试安装、`--update` 备份与回滚、项目接入、`.gitignore` 追加和幂等性。最近一次输出见 [check-output.txt](verification/check-output.txt)。
 
-检查器限定本仓库采用的窄格式；它不是通用 Markdown/YAML 验证器，也不证明所有自然语言指令正确或模型必然遵从。
+## 尚未验证
 
-## 没有执行
-
-当前环境没有 codex 和 claude 可执行程序；Node 为 22.16.0，低于在线 skills CLI 要求。没有升级全局环境、使用账号额度或进行真实模型调用。
-
-Codex / Claude Code 实际发现、自然语言选路、手动命令、项目经验采用和跨会话读回均为 **not-run**。在线 npx 安装、真实业务 E2E、效果/耗时/成本对照也未执行。状态见 [host-results.json](verification/host-results.json)。
-
-本轮通过的是文件结构和机械脚本测试，不能改写成“两个宿主已经跑通”“作者已长期使用”或“减少了多少失败”。下一轮的真实执行任务见 [本地 Codex 任务](docs/codex-task.md)。
+Codex / Claude Code 真实会话中的发现、自然语言选路、手动入口、项目经验采用和跨会话读回都还没有执行；在线 `npx skills add` 安装与业务 E2E 也没有执行。状态见 [host-results.json](verification/host-results.json)，执行步骤见 [host-validation.md](docs/host-validation.md)。

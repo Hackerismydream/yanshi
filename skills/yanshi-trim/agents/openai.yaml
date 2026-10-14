@@ -1,6 +1,0 @@
-interface:
-  display_name: "偃师 · 做减法"
-  short_description: "是不是太复杂了，把不必要的删掉"
-  brand_color: "#365667"
-policy:
-  allow_implicit_invocation: false

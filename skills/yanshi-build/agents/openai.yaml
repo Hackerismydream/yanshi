@@ -3,4 +3,4 @@ interface:
   short_description: "就按这个改，写完顺手测一下"
   brand_color: "#365667"
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

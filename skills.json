@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "skills": [
     {
       "name": "yanshi",
@@ -7,7 +7,7 @@
       "moment": "不知道下一步",
       "trigger_zh": "用偃师帮我推进，看看下一步做什么",
       "trigger_en": "Use yanshi to move this forward; what should we do next?",
-      "implicit": true
+      "implicit": false
     },
     {
       "name": "yanshi-think",
@@ -22,8 +22,8 @@
       "title": "动手",
       "moment": "目标明确，写代码",
       "trigger_zh": "就按这个改，写完顺手测一下",
-      "trigger_en": "Build this and check it when you are done",
-      "implicit": true
+      "trigger_en": "Build this and self-test it",
+      "implicit": false
     },
     {
       "name": "yanshi-debug",
@@ -58,43 +58,11 @@
       "implicit": true
     },
     {
-      "name": "yanshi-first",
-      "title": "重想问题",
-      "moment": "思维快捷键",
-      "trigger_zh": "别沿着这个方案想了，从头分析原因",
-      "trigger_en": "Start from first principles, not the proposed solution",
-      "implicit": false
-    },
-    {
-      "name": "yanshi-challenge",
-      "title": "找反例",
-      "moment": "思维快捷键",
-      "trigger_zh": "别帮它找理由，找个能推翻它的反例",
-      "trigger_en": "Challenge this plan; find a counterexample",
-      "implicit": false
-    },
-    {
-      "name": "yanshi-trim",
-      "title": "做减法",
-      "moment": "思维快捷键",
-      "trigger_zh": "是不是太复杂了，把不必要的删掉",
-      "trigger_en": "Cut the unnecessary complexity",
-      "implicit": false
-    },
-    {
-      "name": "yanshi-ablate",
-      "title": "拆收益",
-      "moment": "思维快捷键",
-      "trigger_zh": "这几个优化，到底哪个有用",
-      "trigger_en": "Which of these changes actually helped?",
-      "implicit": false
-    },
-    {
-      "name": "yanshi-boundary",
-      "title": "看边界",
-      "moment": "思维快捷键",
-      "trigger_zh": "看看职责有没有混在一起，别为了拆而拆",
-      "trigger_en": "Check the responsibility boundaries; do not split just to split",
+      "name": "yanshi-ask",
+      "title": "思维小命令",
+      "moment": "随时插入：first / challenge / trim / ablate / boundary",
+      "trigger_zh": "/yanshi-ask challenge 这个方案",
+      "trigger_en": "/yanshi-ask trim this design",
       "implicit": false
     }
   ]

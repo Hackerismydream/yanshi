@@ -1,5 +1,6 @@
 """Temporary mechanical fixtures only; not examples of author incidents."""
 from pathlib import Path
+import json
 import shutil
 import subprocess
 import sys
@@ -9,6 +10,7 @@ from unittest.mock import patch
 import setup as sut
 
 PACKAGE=Path(__file__).resolve().parents[1]
+SKILLS=len(json.loads((PACKAGE/'skills.json').read_text())['skills'])
 
 def files(root):
     return {str(p.relative_to(root)):p.read_bytes() for p in root.rglob('*') if p.is_file() and not p.is_symlink()}
@@ -23,8 +25,20 @@ class SetupTest(unittest.TestCase):
         self.temp.cleanup()
     def test_project_preview_has_no_writes(self):
         before=files(self.project)
-        self.assertEqual(len(sut.prepare_project(self.project)),3)
+        self.assertEqual(len(sut.prepare_project(self.project)),4)
         self.assertEqual(files(self.project),before)
+    def test_index_comes_from_retro_template(self):
+        sut.apply_project(self.project,sut.prepare_project(self.project))
+        template=(PACKAGE/'skills/yanshi-retro/index-template.md').read_bytes()
+        self.assertEqual((self.project/'.yanshi/INDEX.md').read_bytes(),template)
+    def test_gitignore_entries_added_once(self):
+        (self.project/'.gitignore').write_text('node_modules/\n/.yanshi/HANDOFF.md')
+        sut.apply_project(self.project,sut.prepare_project(self.project))
+        text=(self.project/'.gitignore').read_text()
+        self.assertTrue(text.startswith('node_modules/\n/.yanshi/HANDOFF.md\n'))
+        self.assertEqual(text.count('.yanshi/HANDOFF.md'),1)
+        self.assertEqual(text.count('.yanshi/evidence/'),1)
+        self.assertEqual(sut.prepare_project(self.project),[])
     def test_project_preserves_old_text(self):
         old=b'# Existing\r\nKeep every byte.\r\n'
         for name in ('AGENTS.md','CLAUDE.md'):
@@ -80,7 +94,7 @@ class SetupTest(unittest.TestCase):
         self.assertEqual(files(self.project),{})
     def test_install_preview_has_no_writes(self):
         plan=sut.prepare_install(PACKAGE,self.home,'both')
-        self.assertEqual(len(plan),24)
+        self.assertEqual(len(plan),2*SKILLS)
         self.assertEqual(files(self.home),{})
     def test_both_installs_byte_identical(self):
         plan=sut.prepare_install(PACKAGE,self.home,'both')
@@ -91,8 +105,31 @@ class SetupTest(unittest.TestCase):
         before=files(self.home)
         with self.assertRaises(ValueError):sut.prepare_install(PACKAGE,self.home,'both')
         self.assertEqual(before,files(self.home))
+    def test_update_backs_up_and_replaces(self):
+        sut.apply_install(self.home,sut.prepare_install(PACKAGE,self.home,'both'))
+        edited=self.home/'.claude/skills/yanshi-debug/SKILL.md';edited.write_text('local edit\n')
+        obsolete=self.home/'.claude/skills/yanshi-trim';obsolete.mkdir()
+        plan=sut.prepare_install(PACKAGE,self.home,'both',update=True)
+        moved=sut.apply_install(self.home,plan,update=True,backup=self.home/'bak')
+        self.assertEqual(len(moved),2*SKILLS)
+        for source,dest in plan:self.assertEqual(files(source),files(dest))
+        self.assertEqual((self.home/'bak/.claude/skills/yanshi-debug/SKILL.md').read_text(),'local edit\n')
+        self.assertTrue(obsolete.is_dir())
+        self.assertEqual(sut.obsolete_dirs(self.home,'both'),[obsolete])
+    def test_update_failure_restores_originals(self):
+        sut.apply_install(self.home,sut.prepare_install(PACKAGE,self.home,'both'))
+        (self.home/'.agents/skills/yanshi/SKILL.md').write_text('mine\n')
+        before=files(self.home)
+        plan=sut.prepare_install(PACKAGE,self.home,'both',update=True)
+        with patch.object(sut.shutil,'copytree',side_effect=OSError('injected copy failure')):
+            with self.assertRaises(OSError):sut.apply_install(self.home,plan,update=True,backup=self.home/'bak')
+        self.assertEqual({k:v for k,v in files(self.home).items() if not k.startswith('bak')},before)
+    def test_update_refuses_symlink(self):
+        dest=self.home/'.claude/skills/yanshi';dest.parent.mkdir(parents=True)
+        dest.symlink_to(self.root/'elsewhere',target_is_directory=True)
+        with self.assertRaises(ValueError):sut.prepare_install(PACKAGE,self.home,'both',update=True)
     def test_late_host_collision_prevents_early_copy(self):
-        dest=self.home/'.claude/skills/yanshi-boundary';dest.mkdir(parents=True)
+        dest=self.home/'.claude/skills/yanshi-ask';dest.mkdir(parents=True)
         with self.assertRaises(ValueError):sut.prepare_install(PACKAGE,self.home,'both')
         self.assertFalse((self.home/'.agents').exists())
     def test_dangling_symlink_refused(self):

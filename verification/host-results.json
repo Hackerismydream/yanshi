@@ -1,20 +1,18 @@
 {
-  "date": "2026-10-14",
   "codex": {
     "status": "not-run",
-    "reason": "No codex executable in this build environment"
+    "reason": "docs/host-validation.md has not been run in a real Codex session yet"
   },
   "claude-code": {
     "status": "not-run",
-    "reason": "No claude executable in this build environment"
+    "reason": "docs/host-validation.md has not been run in a real Claude Code session yet"
   },
   "online_skills_install": {
     "status": "not-run",
-    "node_available": "22.16.0",
     "node_required": ">=22.20.0"
   },
   "business_outcomes": {
     "status": "not-run",
-    "reason": "No supplied reproducible business environment or trial evidence"
+    "reason": "No reproducible business environment or trial evidence collected yet"
   }
 }

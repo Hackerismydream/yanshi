@@ -3,4 +3,4 @@ interface:
   short_description: "用偃师帮我推进，看看下一步做什么"
   brand_color: "#365667"
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

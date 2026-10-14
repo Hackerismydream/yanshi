@@ -4,7 +4,7 @@
 
 ## 第一层：安装的通用 Skill
 
-`skills/` 放通用操作与短 Prompt，不含业务表名、账号、部署地址或猜出来的测试命令。retro 不改这个目录。每个入口自带相同的 `project-context.md`，所以单独安装也可以读项目经验；检查器核对副本一致性。
+`skills/` 放通用操作与短 Prompt，不含业务表名、账号、部署地址或猜出来的测试命令。retro 不改这个目录。除 `yanshi-ask` 外，每个入口自带相同的三行 `project-context.md`，所以单独安装也可以读项目经验；检查器核对副本一致性。
 
 ## 第二层：目标项目
 
@@ -29,7 +29,7 @@
 
 **新会话启动时：** Codex 通过适用的 AGENTS 文件收到“先读索引”的指令；Claude Code 通过 `@.yanshi/INDEX.md` 导入索引。索引不是把所有实践全文都导入，只有匹配条目才继续读。
 
-`setup.py project` 负责第二条路径的机械配置。默认打印计划；`--apply` 才改。Codex 存在非空 AGENTS.override.md 时向其添加受控块；Claude Code 使用根 CLAUDE.md。旧正文逐字保留，受控块重复执行不重复追加。
+`setup.py project` 负责第二条路径的机械配置。默认打印计划；`--apply` 才改。Codex 存在非空 AGENTS.override.md 时向其添加受控块；Claude Code 使用根 CLAUDE.md。索引内容取自 `skills/yanshi-retro/index-template.md`。同时把 `.yanshi/HANDOFF.md` 和 `.yanshi/evidence/` 加进项目 `.gitignore`，避免交接内容和原始证据被误提交。旧正文逐字保留，重复执行不重复追加。
 
 嵌套目录指令、宿主管理策略、信任状态和上下文裁剪仍可能影响实际读取。脚本不能证明模型遵从；要在两个真实宿主中新开会话，核对读取轨迹与采用的具体条目。配置后应重启会话，不能假定当前会话已加载。
 
@@ -49,4 +49,4 @@
 
 没有真实例子就 candidate；有一条验证充分的经验无需为了凑次数再等三次。作者“超过三次考虑做 Skill”是复用建议，不是自动提升状态的门槛。
 
-测试账号只留角色和获取方式，秘密值不入文件。证据可以引用而不复制；是否加入 Git 由用户决定。沉淀与交接不等于自动 commit、push 或发布。
+测试账号只留角色和获取方式，秘密值不入文件。证据可以引用而不复制；`setup.py project` 默认忽略 `.yanshi/evidence/`，要跟踪时由用户自行调整。沉淀与交接不等于自动 commit、push 或发布。
