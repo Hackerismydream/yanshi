@@ -1,0 +1,51 @@
+# yanshi
+
+yanshi is a suite of agent skills that selects a workflow by task complexity, from requirements alignment to verifiable delivery, while handling simple tasks directly.
+
+## Recommended installation
+
+```bash
+npx skills add Hackerismydream/yanshi -g -a codex -y
+```
+
+This uses the vercel-labs/skills CLI to install all 11 skills into ~/.agents/skills, the user skill directory read by Codex. Replace codex after -a with another supported agent if needed:
+https://github.com/vercel-labs/skills#supported-agents
+
+To install only one sub-skill, append --skill yanshi-e2e to the command.
+
+## Manual installation
+
+1. Clone the repository into a new local directory:
+
+   git clone https://github.com/Hackerismydream/yanshi.git
+   cd yanshi
+
+2. Identify the host's supported user skill directory. For Codex, use ~/.agents/skills. For other hosts, confirm the actual directory before copying.
+3. Before copying anything, check every destination corresponding to a directory under skills/. If any destination already exists, including a symlink, STOP and ask the user how to proceed. Do not overwrite, merge, or delete existing content.
+4. Create the destination skill directory if it does not exist. Copy each complete directory under skills/ directly into it, preserving the directory name and all contents, including SKILL.md, reference files, and agents/ metadata. Do not copy skills/ as an extra nesting level.
+
+## Verify installation
+
+For a full installation, confirm that the host's skill directory contains each of these 11 directories with a readable SKILL.md. Check that each file's name frontmatter matches its directory name and that reference files were copied too:
+
+- yanshi
+- yanshi-align
+- yanshi-design
+- yanshi-split
+- yanshi-implement
+- yanshi-self-test
+- yanshi-review
+- yanshi-e2e
+- yanshi-accept
+- yanshi-handoff
+- yanshi-retro
+
+For a single-skill installation, check only the selected skill. Refresh or restart the host's session if needed, then check its available skills. Report separately whether files are present and whether the host discovers them; copying files alone does not prove successful invocation.
+
+## Entry point
+
+The entry skill is yanshi. Ask the agent to use yanshi for a requirement, providing the goal, existing materials, and authorized scope. Each sub-skill can also be invoked independently. If the host lacks a skill invocation tool but can read files, explicitly provide the installed yanshi/SKILL.md and follow its references.
+
+## Repository
+
+https://github.com/Hackerismydream/yanshi
