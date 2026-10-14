@@ -1,6 +1,6 @@
 # 作者实践卡
 
-每张卡按“什么时候用 / 作者原话 / 为什么 / 真实例子”记录。原话摘自作者的 [原文](https://x.com/huangtongxueh/status/2108577165306687938) 与 E2E 帖，逐字收录在 [source-excerpts.json](source-excerpts.json)。目前“真实例子”大多还空着，正在收集，见 [CONTRIBUTING](../CONTRIBUTING.md)。日常入口名称是本版整理，不代表作者原来就这样命名。
+每张卡按“什么时候用 / 作者原话 / 为什么 / 真实例子”记录。原话摘自作者的 [原文](https://x.com/huangtongxueh/status/2108577165306687938) 与 E2E 帖，逐字收录在 [source-excerpts.json](source-excerpts.json)。目前“真实例子”大多还空着，正在收集，见 [CONTRIBUTING](../CONTRIBUTING.md)；作者自己的两周试用与记录方法见 [评测计划](evaluation.md)。日常入口名称是本版整理，不代表作者原来就这样命名。
 
 ## 最短有效路径
 

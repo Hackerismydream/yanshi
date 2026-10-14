@@ -1,0 +1,113 @@
+# yanshi A/B 任务集。完整候选清单与评分口径见 docs/evaluation.md。
+#
+# 下面每一条都是 template: true 的模板，runner 默认跳过。正式使用时：
+#   1. 复制一条，去掉 template，id 改成正式 id；
+#   2. 填 base_commit（SWE-bench 对应行的 base_commit 字段，或上游 PR 合并前的父提交），不要猜；
+#   3. 填 contract：隐藏测试补丁放在 evals/fixtures/，命令只在 Agent 结束后执行，Agent 看不到。
+# 仍含 TODO 的字段会让该 trial 记为 U（not-run），不会被猜测补齐。
+
+version: 1
+
+hosts:
+  # 两组共用同一条命令；唯一差别是 with 组在 checkout 里装了 skills。
+  # 参数先用本机 `<cli> --help` 核对再跑。需要让 Agent 执行测试时，只在一次性容器或虚拟机里
+  # 放宽权限（Claude Code: --permission-mode；Codex: --sandbox），并在 run.json 旁记录所用值。
+  claude-code:
+    version_cmd: [claude, --version]
+    argv: [claude, -p, "{prompt}", --output-format, stream-json, --verbose, --no-session-persistence]
+    invoke_prefix: "/"
+  codex:
+    version_cmd: [codex, --version]
+    argv: [codex, exec, --json, "{prompt}"]
+    invoke_prefix: "$"
+
+defaults:
+  repeats: 3
+  timeout_s: 1800
+
+tasks:
+  # ---- think：只讨论方案，不应改代码 ----
+  - id: tmpl-think-sympy-20590
+    template: true
+    moment: think
+    expected_skill: yanshi-think
+    repo: https://github.com/sympy/sympy
+    upstream:
+      pr: "https://github.com/sympy/sympy/pull/20590"
+      issue: "https://github.com/sympy/sympy/issues/20567"
+    swebench_id: sympy__sympy-20590
+    base_commit: TODO  # SWE-bench 行的 base_commit
+    prompt: |
+      Symbol 实例从 1.7 开始有了 __dict__，以前没有。帮我想想怎么做，先别急着写代码。
+    contract:
+      kind: rubric
+      # 评分人对照上游修复判断：是否定位到缺 __slots__ 的 mixin；验收标准是否来自“Symbol 不应有 __dict__”；
+      # diff.patch 必须为空（只讨论方案）。
+      rubric: [root-cause-located, acceptance-from-contract, no-code-edits]
+
+  # ---- build：手动入口，with 组自动加 $yanshi-build / /yanshi-build 前缀 ----
+  - id: tmpl-build-flask-4045
+    template: true
+    moment: build
+    expected_skill: yanshi-build
+    invoke: yanshi-build
+    repo: https://github.com/pallets/flask
+    upstream:
+      pr: "https://github.com/pallets/flask/pull/4045"
+      issue: "https://github.com/pallets/flask/issues/4041"
+    swebench_id: pallets__flask-4045
+    base_commit: TODO
+    prompt: |
+      Blueprint names must not contain a dot. Build this and self-test it.
+    contract:
+      kind: hidden-tests
+      test_patch: TODO   # evals/fixtures/flask-4045.test.patch，取自 SWE-bench 行的 test_patch
+      command: TODO      # 只跑 FAIL_TO_PASS 与 PASS_TO_PASS 列出的测试
+
+  # ---- debug：已看到失败，要找原因并修复 ----
+  - id: tmpl-debug-django-11099
+    template: true
+    moment: debug
+    expected_skill: yanshi-debug
+    repo: https://github.com/django/django
+    upstream:
+      pr: "https://github.com/django/django/pull/11099"
+      ticket: "https://code.djangoproject.com/ticket/30257"
+    swebench_id: django__django-11099
+    base_commit: TODO
+    prompt: |
+      用户名末尾带换行符居然能注册成功。这个 bug 怎么回事，先帮我查一下，查清楚了就修。
+    contract:
+      kind: hidden-tests
+      test_patch: TODO
+      command: TODO
+
+  # ---- check：给一个故意不完整的修复，问能不能提交；正确结论是“不能” ----
+  - id: tmpl-check-django-11099-partial
+    template: true
+    moment: check
+    expected_skill: yanshi-check
+    repo: https://github.com/django/django
+    swebench_id: django__django-11099
+    base_commit: TODO
+    # 运行前把变异补丁应用到工作区但不提交：只改 ASCII 用户名校验器、漏掉 Unicode 版本。
+    # 补丁由评测者构造并存档，必须能让至少一个 FAIL_TO_PASS 测试失败、已有测试通过。
+    setup_patch: TODO  # evals/fixtures/django-11099-partial.patch
+    prompt: |
+      Check this before I submit it; does it actually work? Don't change any code.
+    contract:
+      kind: verdict
+      expected_verdict: not-ready   # Agent 结论说“可以提交”即为 false pass
+      also: [no-code-edits]
+
+  # ---- 选路探针：不评任务成败，只看选中的入口 ----
+  - id: tmpl-route-handoff-requests
+    template: true
+    moment: handoff
+    expected_skill: yanshi-handoff
+    repo: https://github.com/psf/requests
+    base_commit: TODO
+    prompt: |
+      上下文快满了，整理一下给下个会话。
+    contract:
+      kind: routing-only

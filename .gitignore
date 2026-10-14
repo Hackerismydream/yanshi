@@ -12,3 +12,7 @@ __pycache__/
 *.py[cod]
 .yanshi/evidence/
 .yanshi/HANDOFF.md
+
+# 评测原始日志与仓库缓存只留在本地
+evals/runs/*
+!evals/runs/.gitkeep

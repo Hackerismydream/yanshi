@@ -71,7 +71,7 @@ def audit(root: Path) -> list[str]:
         rel = path.relative_to(root)
         if '.git' in rel.parts or '__pycache__' in rel.parts:
             continue
-        if rel.parts and rel.parts[0] in IGNORED_TOP:
+        if rel.parts and rel.parts[0] in IGNORED_TOP or rel.parts[:2] == ('evals', 'runs'):
             continue
         if path.is_symlink():
             errors.append(f'symlink in repository: {rel}')
