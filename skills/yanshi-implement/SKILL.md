@@ -5,7 +5,7 @@ description: "模型调用：目标和改动范围已明确且已授权实现或
 
 # 编码实现
 
-> 依据 原文材料「二」与 Skill 结构材料。委派裁剪和实现检查细则为「推断」。
+> 来源见 README「来源」小节；本文件的委派裁剪和实现检查细则为（推断）。
 
 1. 接收明确目标、契约、修改边界和已有方案。已有实现或本次只要求分析、审查、验收时跳过编码，返回当前状态。
 2. 外部实现流程能遵守所选路径且策略允许时：`Call the Skill tool with "implement"`。没有 Skill 调用器时，读取同套件的 `../implement/SKILL.md` 并按其执行。。以 Spec 为入口且仅另一名称可用时：`Call the Skill tool with "implement-spec"`。没有 Skill 调用器时，读取同套件的 `../implement-spec/SKILL.md` 并按其执行。。一次只选择一个；缺失、受限或会强制增加未选步骤时，在当前范围内直接完成最小实现。
