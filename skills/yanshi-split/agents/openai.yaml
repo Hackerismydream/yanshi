@@ -1,0 +1,7 @@
+# 界面文案与调用策略：推断；品牌色沿用视觉材料。
+interface:
+  display_name: "偃师 · 任务拆分"
+  short_description: "把复杂需求拆成可独立验收的小增量，明确依赖、并行条件和集成责任"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: true

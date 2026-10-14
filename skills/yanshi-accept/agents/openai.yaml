@@ -1,0 +1,7 @@
+# 界面文案与调用策略：推断；品牌色沿用视觉材料。
+interface:
+  display_name: "偃师 · 业务验收"
+  short_description: "对照业务契约汇总验证证据和高风险实现，为人工判断准备验收材料"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: true

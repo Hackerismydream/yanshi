@@ -1,0 +1,7 @@
+# 界面文案与调用策略：推断；品牌色沿用视觉材料。
+interface:
+  display_name: "偃师 · 上下文交接"
+  short_description: "压缩目标、决策、变更、证据和阻塞，让新会话知道下一步从哪里继续"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: true

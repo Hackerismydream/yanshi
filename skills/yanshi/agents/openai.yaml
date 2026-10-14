@@ -1,0 +1,7 @@
+# 界面文案与调用策略：推断；品牌色沿用视觉材料。
+interface:
+  display_name: "偃师 · 总控"
+  short_description: "根据任务目标、复杂度和现有证据选择下一步，按需推进开发与验收"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: false
