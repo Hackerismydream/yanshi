@@ -1,7 +1,6 @@
-# 界面文案与调用策略：推断；品牌色沿用视觉材料。
 interface:
-  display_name: "偃师 · 端到端验收"
-  short_description: "按自然语言验收目标在真实系统中实际操作，以业务契约判断并留下证据"
+  display_name: "偃师 · 业务取证"
+  short_description: "从自然语言目标执行真实业务路径，独立回读并保留失败证据"
   brand_color: "#365667"
 policy:
   allow_implicit_invocation: true

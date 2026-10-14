@@ -1,50 +1,50 @@
 # yanshi
 
-yanshi is a suite of agent skills that selects a workflow by task complexity, from requirements alignment to verifiable delivery, while handling simple tasks directly.
+Four skills for falsifiable design decisions, contract-driven E2E evidence, and cross-review handoff. No coding or TDD wrappers.
 
-## Recommended installation
+## Installation
 
-```bash
-npx skills add Hackerismydream/yanshi -g -a codex -y
-```
+The skills CLI requires Node >= 22.20. With user authorization, install the published suite:
 
-This uses the vercel-labs/skills CLI to install all 11 skills into ~/.agents/skills, the user skill directory read by Codex. Replace codex after -a with another supported agent if needed:
-https://github.com/vercel-labs/skills#supported-agents
+npx skills add Hackerismydream/yanshi --skill '*' -g -a codex
 
-To install only one sub-skill, append --skill yanshi-e2e to the command.
+For an extracted or unpublished revision, run from that directory:
 
-## Manual installation
+npx skills add . --skill '*' -g -a codex
 
-1. Clone the repository into a new local directory:
+To install only E2E, replace --skill '*' with --skill yanshi-e2e.
+The remote command uses the published repository, not an unpublished local package.
 
-   git clone https://github.com/Hackerismydream/yanshi.git
-   cd yanshi
+For manual installation, follow README.md. Copy complete skill directories to the host's confirmed skill location; for Codex the user location is ~/.agents/skills. Check all destinations first and stop on an existing directory or symlink. Do not overwrite, delete, or merge old installations without authorization.
 
-2. Identify the host's supported user skill directory. For Codex, use ~/.agents/skills. For other hosts, confirm the actual directory before copying.
-3. Before copying anything, check every destination corresponding to a directory under skills/. If any destination already exists, including a symlink, STOP and ask the user how to proceed. Do not overwrite, merge, or delete existing content.
-4. Create the destination skill directory if it does not exist. Copy each complete directory under skills/ directly into it, preserving the directory name and all contents, including SKILL.md, reference files, and agents/ metadata. Do not copy skills/ as an extra nesting level.
+## Installed names
 
-## Verify installation
+- yanshi: entry routing; implicit invocation enabled.
+- yanshi-challenge: counterexamples, ablation, and simplification; implicit invocation disabled.
+- yanshi-e2e: real-interface acceptance and evidence; implicit invocation enabled.
+- yanshi-review: cross-review handoff and repair tracking; implicit invocation disabled.
 
-For a full installation, confirm that the host's skill directory contains each of these 11 directories with a readable SKILL.md. Check that each file's name frontmatter matches its directory name and that reference files were copied too:
+The three specialist skills stand alone. Full entry routing needs all four. Read the selected SKILL.md and its linked files; no dedicated Skill tool is required. Runtime instructions are in Chinese.
 
-- yanshi
-- yanshi-align
-- yanshi-design
-- yanshi-split
-- yanshi-implement
-- yanshi-self-test
-- yanshi-review
-- yanshi-e2e
-- yanshi-accept
-- yanshi-handoff
-- yanshi-retro
+## Upgrade from v2
 
-For a single-skill installation, check only the selected skill. Refresh or restart the host's session if needed, then check its available skills. Report separately whether files are present and whether the host discovers them; copying files alone does not prove successful invocation.
+Back up and remove retired installations only with authorization:
+yanshi-align, yanshi-design, yanshi-split, yanshi-implement,
+yanshi-self-test, yanshi-accept, yanshi-handoff, yanshi-retro.
+Replace retained directories completely to avoid stale files. See CHANGELOG.md.
 
-## Entry point
+## Verify
 
-The entry skill is yanshi. Ask the agent to use yanshi for a requirement, providing the goal, existing materials, and authorized scope. Each sub-skill can also be invoked independently. If the host lacks a skill invocation tool but can read files, explicitly provide the installed yanshi/SKILL.md and follow its references.
+Check file presence and host discovery separately. Only yanshi and yanshi-e2e enable implicit invocation in agents/openai.yaml; do not assume another host honors that metadata.
+
+Package check, from the repository root:
+python3 scripts/check.py --text-only --self-test
+
+--text-only permits the known image assets to be absent. Omit it in the complete repository. This checks packaging, not model behavior or business outcomes.
+
+## Evidence boundary
+
+Expected results come from the business contract. Success messages do not establish persistence, API evidence does not replace required UI actions, unknown cost is not zero, and retries preserve original failures. No host-behavior improvement has been established.
 
 ## Repository
 

@@ -1,7 +1,6 @@
-# 界面文案与调用策略：推断；品牌色沿用视觉材料。
 interface:
   display_name: "偃师 · 交叉审查"
-  short_description: "以契约和变更证据审查高风险路径，区分独立审查、复查与待核实风险"
+  short_description: "交接契约与变更快照，将业务反例交回主实现者修复并复验"
   brand_color: "#365667"
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

@@ -1,7 +1,0 @@
-# 界面文案与调用策略：推断；品牌色沿用视觉材料。
-interface:
-  display_name: "偃师 · 需求对齐"
-  short_description: "结合需求材料与代码澄清目标、边界和验收依据，留下可共享结论"
-  brand_color: "#365667"
-policy:
-  allow_implicit_invocation: true

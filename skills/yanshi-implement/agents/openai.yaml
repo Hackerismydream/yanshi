@@ -1,7 +1,0 @@
-# 界面文案与调用策略：推断；品牌色沿用视觉材料。
-interface:
-  display_name: "偃师 · 编码实现"
-  short_description: "在已明确且获准的范围内实现或修复，保持小变更并交代验证影响"
-  brand_color: "#365667"
-policy:
-  allow_implicit_invocation: true

@@ -1,7 +1,0 @@
-# 界面文案与调用策略：推断；品牌色沿用视觉材料。
-interface:
-  display_name: "偃师 · 实现者自测"
-  short_description: "选择与当前改动相关的检查，记录实际结果并按需验证优化的真实贡献"
-  brand_color: "#365667"
-policy:
-  allow_implicit_invocation: true

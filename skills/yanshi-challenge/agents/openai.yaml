@@ -1,0 +1,6 @@
+interface:
+  display_name: "偃师 · 方案挑战"
+  short_description: "把核心假设变成具体反例、最小区分实验与可删除的机制"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: false
