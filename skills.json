@@ -1,0 +1,101 @@
+{
+  "version": "1.0.0",
+  "skills": [
+    {
+      "name": "yanshi",
+      "title": "入口",
+      "moment": "不知道下一步",
+      "trigger_zh": "用偃师帮我推进，看看下一步做什么",
+      "trigger_en": "Use yanshi to move this forward; what should we do next?",
+      "implicit": true
+    },
+    {
+      "name": "yanshi-think",
+      "title": "想清楚",
+      "moment": "接到需求，开工前",
+      "trigger_zh": "帮我想想怎么做，先别急着写",
+      "trigger_en": "Help me think this through before coding",
+      "implicit": true
+    },
+    {
+      "name": "yanshi-build",
+      "title": "动手",
+      "moment": "目标明确，写代码",
+      "trigger_zh": "就按这个改，写完顺手测一下",
+      "trigger_en": "Build this and check it when you are done",
+      "implicit": true
+    },
+    {
+      "name": "yanshi-debug",
+      "title": "排障",
+      "moment": "卡住了，出 bug",
+      "trigger_zh": "这个 bug 怎么回事，先帮我查一下",
+      "trigger_en": "Why is this failing? Help me debug it",
+      "implicit": true
+    },
+    {
+      "name": "yanshi-check",
+      "title": "验一下",
+      "moment": "提交、合并前",
+      "trigger_zh": "提交前帮我看一眼，确认真的能用",
+      "trigger_en": "Check this before I submit it; does it actually work?",
+      "implicit": true
+    },
+    {
+      "name": "yanshi-handoff",
+      "title": "交接",
+      "moment": "上下文满了，换会话",
+      "trigger_zh": "上下文快满了，整理一下给下个会话",
+      "trigger_en": "Prepare a handoff for the next session",
+      "implicit": true
+    },
+    {
+      "name": "yanshi-retro",
+      "title": "记下来",
+      "moment": "需求做完，记录经验",
+      "trigger_zh": "复盘一下，把这次踩的坑记到项目里",
+      "trigger_en": "Capture what went wrong and save the lesson in this project",
+      "implicit": true
+    },
+    {
+      "name": "yanshi-first",
+      "title": "重想问题",
+      "moment": "思维快捷键",
+      "trigger_zh": "别沿着这个方案想了，从头分析原因",
+      "trigger_en": "Start from first principles, not the proposed solution",
+      "implicit": false
+    },
+    {
+      "name": "yanshi-challenge",
+      "title": "找反例",
+      "moment": "思维快捷键",
+      "trigger_zh": "别帮它找理由，找个能推翻它的反例",
+      "trigger_en": "Challenge this plan; find a counterexample",
+      "implicit": false
+    },
+    {
+      "name": "yanshi-trim",
+      "title": "做减法",
+      "moment": "思维快捷键",
+      "trigger_zh": "是不是太复杂了，把不必要的删掉",
+      "trigger_en": "Cut the unnecessary complexity",
+      "implicit": false
+    },
+    {
+      "name": "yanshi-ablate",
+      "title": "拆收益",
+      "moment": "思维快捷键",
+      "trigger_zh": "这几个优化，到底哪个有用",
+      "trigger_en": "Which of these changes actually helped?",
+      "implicit": false
+    },
+    {
+      "name": "yanshi-boundary",
+      "title": "看边界",
+      "moment": "思维快捷键",
+      "trigger_zh": "看看职责有没有混在一起，别为了拆而拆",
+      "trigger_en": "Check the responsibility boundaries; do not split just to split",
+      "implicit": false
+    }
+  ]
+}

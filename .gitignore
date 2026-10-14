@@ -8,3 +8,8 @@ design/images/logo-b.png
 design/images/logo-c.png
 design/images/logo-v2-*.png
 !design/images/logo-v2-2.png
+
+__pycache__/
+*.py[cod]
+.yanshi/evidence/
+.yanshi/HANDOFF.md

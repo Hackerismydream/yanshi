@@ -1,0 +1,6 @@
+interface:
+  display_name: "偃师 · 看边界"
+  short_description: "看看职责有没有混在一起，别为了拆而拆"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: false

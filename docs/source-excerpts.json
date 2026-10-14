@@ -1,0 +1,93 @@
+[
+  {
+    "id": "shortest-path",
+    "author_quote": "简单任务直接做，复杂任务再增加规划、拆分和交叉审查。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "think",
+    "author_quote": "当剩下的问题已经不会显著改变实现方向和验收结果时，就可以开始开发了。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "build",
+    "author_quote": "能通过类型检查、测试和业务断言发现的问题，尽量让 Agent 在开发过程中自己处理；需要我判断的，则集中到需求有没有理解对、关键业务逻辑是否成立，以及这次改动还有哪些没有验证的风险。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "debug",
+    "author_quote": "DB 查询用于确认状态，日志和 Trace 用于解释失败，但预期结果仍然必须来自业务契约，不能让 Agent 看到系统返回了什么，就认为什么是正确的。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "check",
+    "author_quote": "不能只看测试通过了多少，还要看这些测试是否验证了这次需求真正关心的事情。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "handoff",
+    "author_quote": "handoff：把当前上下文整理成文件，方便在新会话中继续任务。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "retro",
+    "author_quote": "我的建议是，日常工作中，一个流程重复超过三次，就可以考虑让 Codex 帮你整理成 Skill，之后直接复用。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "first",
+    "author_quote": "不要基于“加 Redis 缓存”这个既定方案继续设计。从第一性原理分析这个接口为什么慢，以及最小必要的解决方案。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "challenge",
+    "author_quote": "对这个方案做一次对抗性审查，优先寻找能推翻核心假设的反例。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "trim",
+    "author_quote": "用奥卡姆剃刀重新审查这个设计，在满足需求的前提下，删除所有非必要机制。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "ablate",
+    "author_quote": "给这三个优化设计消融实验，判断真正的收益来自哪里。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "boundary",
+    "author_quote": "按高内聚、低耦合原则审查 OrderService 的职责边界，不要为了拆而拆。",
+    "source": "https://x.com/huangtongxueh/status/2108577165306687938",
+    "evidence_kind": "supplied-article",
+    "real_case_supplied": false
+  },
+  {
+    "id": "e2e",
+    "author_quote": "端到端的测试不需要写常规的测试用例，需要定义每个具体的 case 的验收目标",
+    "source": "https://x.com/huangtongxueh/status/2108796450306146491",
+    "evidence_kind": "supplied-comment",
+    "real_case_supplied": false
+  }
+]

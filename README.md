@@ -5,128 +5,93 @@
   </picture>
 </p>
 
-# yanshi 偃师
+# yanshi 偃师 · v1.0
 
 English · [中文](README_CN.md)
 
-**Challenge the design. Verify the business outcome. Hand over the evidence.**
+**My everyday habits for building with AI. Handle simple work directly, add steps only where they help, and ground conclusions in evidence.**
 
-yanshi does not wrap requirements gathering, coding, TDD, or publishing. It adds concrete counterexamples, contract-driven E2E evidence, and a handoff format for independent business-path review.
+An author-use build, not a claim of proven improvement. Practice content comes from the author's supplied article, E2E post, and actual correction records. Missing real examples remain empty. Entry names, storage conventions, and host integration are implementation decisions rather than historical practice claims.
 
-## Four skills
+## Moments, not a pipeline
 
-| Skill | Job | Implicit invocation |
-|---|---|---|
-| [yanshi](skills/yanshi/SKILL.md) | Identify the missing design decision, implementation, runtime evidence, or cross-review | Enabled |
-| [yanshi-challenge](skills/yanshi-challenge/SKILL.md) | Challenge an untested mechanism, design an ablation, or simplify a proposal | Disabled; explicit selection or entry routing |
-| [yanshi-e2e](skills/yanshi-e2e/SKILL.md) | Execute natural-language acceptance goals through real interfaces; compare execution setups | Enabled |
-| [yanshi-review](skills/yanshi-review/SKILL.md) | Hand contracts and evidence to another reviewer; return findings for repair and re-verification | Disabled; explicit selection or entry routing |
+Six everyday entries cover thinking before starting, building and checking the change, debugging a failure, checking before submission, handing off, and reflecting. `yanshi` selects the current moment. Five manual shortcuts preserve the author's concise thinking prompts. Each specialist works on its own; full routing requires the whole suite.
 
-The three specialist skills are independently installable. Full entry routing needs the whole suite. Runtime instructions are written in Chinese; provide task inputs in the language supported by your agent.
+| Entry | Say this |
+|---|---|
+| `yanshi` | Use yanshi to move this forward; what should we do next? |
+| `yanshi-think` | Help me think this through before coding |
+| `yanshi-build` | Build this and check it when you are done |
+| `yanshi-debug` | Why is this failing? Help me debug it |
+| `yanshi-check` | Check this before I submit it; does it actually work? |
+| `yanshi-handoff` | Prepare a handoff for the next session |
+| `yanshi-retro` | Capture what went wrong and save the lesson in this project |
+| `yanshi-first` | Start from first principles, not the proposed solution |
+| `yanshi-challenge` | Challenge this plan; find a counterexample |
+| `yanshi-trim` | Cut the unnecessary complexity |
+| `yanshi-ablate` | Which of these changes actually helped? |
+| `yanshi-boundary` | Check the responsibility boundaries; do not split just to split |
+
+In Codex, use `$yanshi-challenge`; in Claude Code, use `/yanshi-challenge`. The other names work the same way. The five shortcuts are manual-only and are not five additional stages. Runtime text is Chinese; trigger descriptions include both languages. See [usage](docs/usage.md).
 
 ## Install
 
-The skills CLI requires **Node ≥ 22.20**. Install the published suite:
+The skills CLI requires **Node ≥ 22.20**. To try this local package, run from its extracted root:
 
 ```bash
-npx skills add Hackerismydream/yanshi --skill '*' -g -a codex
+npx skills add . --skill '*' -g -a codex -a claude-code
 ```
 
-Install only business-path verification:
+After this revision is published:
 
 ```bash
-npx skills add Hackerismydream/yanshi --skill yanshi-e2e -g -a codex
+npx skills add Hackerismydream/yanshi --skill '*' -g -a codex -a claude-code
 ```
 
-For an extracted or unpublished revision, run from its repository root:
+Replace `'*'` with one skill name for a single entry. The remote command installs the remote repository, not an unpublished local ZIP.
+
+Without a suitable Node installation, use Python ≥ 3.10 and the included copy script. The first command previews; only `--apply` writes:
 
 ```bash
-npx skills add . --skill '*' -g -a codex
+python3 scripts/setup.py install --host both
+python3 scripts/setup.py install --host both --apply
 ```
 
-The remote command installs the published repository, not a ZIP in your working directory. For other hosts, select an agent identifier the CLI actually supports. Installer support is not evidence of tested runtime behavior.
+All destinations are checked first. Existing directories and dangling symlinks cause refusal, not overwrite. Follow [migration notes](CHANGELOG.md) rather than clearing your global skills. Codex sidecar policy and Claude Code frontmatter controls are configured separately; copied files alone do not prove host execution.
 
-<details>
-<summary>Without Node: manual Codex installation</summary>
+## Project learning
 
-Run from the repository root. All destinations are checked before copying; an existing directory or symlink causes an exit rather than an overwrite.
+Every entry reads the target project's `.yanshi/INDEX.md` when it exists and loads only matching `active` practices. No index means no extra files are created for a small task. Project commands, verification entry points, and actual lessons belong in the project, not in the installed generic skills.
+
+To reconnect the index at the start of new sessions, opt in once from the target project root:
 
 ```bash
-(
-  set -eu
-  target="$HOME/.agents/skills"
-  for name in yanshi yanshi-challenge yanshi-e2e yanshi-review; do
-    test -f "skills/$name/SKILL.md"
-    dest="$target/$name"
-    if [ -e "$dest" ] || [ -L "$dest" ]; then
-      printf 'Destination exists; back up and resolve first: %s\n' "$dest" >&2
-      exit 1
-    fi
-  done
-  mkdir -p "$target"
-  for name in yanshi yanshi-challenge yanshi-e2e yanshi-review; do
-    cp -R "skills/$name" "$target/$name"
-  done
-)
+python3 /actual/package/path/yanshi-v1.0/scripts/setup.py project --project .
+python3 /actual/package/path/yanshi-v1.0/scripts/setup.py project --project . --apply
 ```
 
-</details>
+This creates an empty practice index and adds a bounded block to the effective root Codex instruction file and `CLAUDE.md`, preserving existing text. A non-empty `AGENTS.override.md` takes precedence. The script does not change global configuration. It is an optional setup action, not a new task stage.
 
-Before upgrading from v2, back up and remove the eight retired skill installations listed in [CHANGELOG.md](CHANGELOG.md). Replace retained skill directories as well to avoid stale references. When applying this text package to an existing repository, replace the entire `skills/` directory rather than overlaying files. Preserve existing image directories.
+Retro writes only when asked to save a lesson. `candidate` entries do not automatically apply; `active` requires a real quote, evidence, scope, and verification; outdated records become `retired`. Reading is driven by host instructions and skill file access, not a background process or guaranteed model behavior. See [project conventions](docs/project-memory.md).
 
-## Use
+The first progress line identifies the selected entry, such as `[偃师·排障]`. Any reported count of loaded project practices must reflect actual reads. A banner is not acceptance evidence.
 
-```text
-Use yanshi-challenge on <proposal>.
-Constraints: <business requirements>. Evidence: <observations>.
-Find the strongest counterexample and the experiment result that would make us remove the mechanism.
-```
+## Evidence and validation
 
-```text
-Use yanshi-e2e to verify <business outcome>, without editing code.
-Contract: <location>. Entry and identity: <real environment>. Write scope: <authorization>.
-Return actual actions, independent read-back, and evidence for each goal. Read existing project instructions rather than guessing commands.
-```
-
-```text
-Use yanshi-review to hand <changes and evidence> to another reviewer.
-Fix the contract and change snapshot first. Return concrete counterexamples to the main implementer for repair and re-verification.
-```
-
-## Evidence rules
-
-The business contract defines expected results; tools provide evidence. A success toast does not prove persistence: use independent authoritative read-back. API results do not substitute for required UI verification. Unexecuted work is not a pass, and repairs or retries must retain the original failure.
-
-E2E does not require a prewritten browser script or a conventional test-case suite. This is not a blanket ban on AI-written tests; code-level testing stays with the project’s existing approach.
-
-The [comparison template](skills/yanshi-e2e/comparison-template.md) keeps P/F/B/U, fixed denominators, duration, and cost together. Unknown cost is not zero; failed samples remain in the report. The [failure-mode guide](skills/yanshi-e2e/failure-modes.md) contains diagnostic rules, not claimed production incidents.
-
-## Hosts and dependencies
-
-Use Codex or a host that reads standard `SKILL.md` files. No proprietary invocation tool is assumed. Frontmatter contains only `name` and `description`; Codex invocation policy lives in `agents/openai.yaml`. Hosts that ignore this metadata need their own verified invocation controls or explicit selection.
-
-Skill icons are intentionally unset. Installing a single skill does not carry the repository-level `assets/` directory, so a repository-relative icon path would not remain reliable. README logo paths are unchanged.
-
-There are no external skill dependencies. If you have `grilling`, `tdd`, or `code-review` installed, keep using them for their original jobs. Read their actual installed locations; do not assume sibling directories.
-
-## Verification status
-
-Run the package and regression checks:
+Expected results come from the business contract. A success message does not establish persistence; verify through an independent authoritative read. API evidence does not replace required UI operations. Keep original failures across retries and repairs. E2E does not require a prewritten browser script; this is not a blanket ban on AI-written tests.
 
 ```bash
-python3 scripts/check.py --text-only --self-test
+python3 scripts/check.py --self-test
 ```
 
-Use `--text-only` only for the text delivery without images; remove it after merging into the original repository to check image references. See [verification.md](verification.md) for results and limits. There is no host-behavior comparison or measured business improvement yet; package checks do not establish agent reliability.
+See [verification.md](verification.md) for package checks, script tests, and unexecuted host tests. Live Codex and Claude Code sessions have not been validated here. The [local Codex task](docs/codex-task.md) covers real-host checks without treating output markers as proof.
 
-## Name
+Each [practice card](docs/author-practices.md) separates when to use it, the author's exact words, the actual reason or failure, and a real example. [Missing evidence](docs/author-evidence-request.md) stays visibly missing.
 
-Yan Shi is the craftsman in *Liezi · Tang Wen* who built a mechanical performer able to sing and dance. The name evokes directing agents to do useful work.
+## Name, logo, and sources
 
-## Sources and design
+Yan Shi is the craftsman in *Liezi · Tang Wen* who built a mechanical performer able to sing and dance. The name evokes directing agents to do useful work. The existing light/dark README logo paths are retained; per-skill icons are unset because single-skill installs do not include repository assets.
 
-[Original article](https://x.com/huangtongxueh/status/2108577165306687938) · [E2E post](https://x.com/huangtongxueh/status/2109687887264681986) · [Skill-writing reference](https://github.com/mattpocock/skills)
+[Article](https://x.com/huangtongxueh/status/2108577165306687938) · [E2E post](https://x.com/huangtongxueh/status/2109687887264681986) · [Design and source boundaries](design-notes.md) · [Host documentation](docs/hosts.md)
 
-[Codex skills](https://developers.openai.com/codex/build-skills) · [skills CLI](https://github.com/vercel-labs/skills) · [CLI Node requirement](https://github.com/vercel-labs/skills/blob/main/package.json)
-
-[design-notes.md](design-notes.md) separates source material, added design decisions, and missing field evidence. None of those provenance annotations are loaded into runtime instructions. [MIT](LICENSE).
+[MIT](LICENSE). Version `1.0.0` names this product iteration, not a completed field-validation claim.

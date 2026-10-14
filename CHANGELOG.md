@@ -1,31 +1,31 @@
-# 变更记录
+# 版本记录
 
-## v3：从十一层入口收敛为四个 Skill
+## 1.0.0：日常习惯，自用验证版
 
-删除通用转发层，集中于方案反例、真实业务取证与交叉审查。入口根据当前证据缺口选路，不再组织十个子步骤。
+这是从实验稿 v3 重新确立的产品版本；不是对既往主版本排序或实测效果的声明。
 
-| v2 入口 | v3 去向 |
+- 用六个日常时刻代替研发阶段：想清楚、动手、排障、验一下、交接、记下来；总控只选当前路径。
+- 五个思维快捷键单独安装、主动调用，不藏在方案参考文件里，也不自动串成步骤。
+- 通用实践与项目经验分开。retro 的四项记录存目标项目；新会话通过可选择的宿主接入读回索引。
+- 日常入口使用中英文口语触发句，给首条进展加一行生效标识；标识不是完成证据。
+- 实践卡只保留作者原话和可证实的做法。没有排障会话、实验或项目案例的地方留空，不填想象故事。
+- 同步 Codex / Claude Code 的安装、手动快捷键策略与新会话读取机制；真实会话状态单列。
+
+## 从 v3 迁移
+
+| 旧名字 | 新去向 |
 |---|---|
-| yanshi | 保留，重写为缺口选路 |
-| yanshi-design | 合并到新名称 yanshi-challenge |
-| yanshi-review | 保留，聚焦交接、业务反例与修复复验 |
-| yanshi-e2e | 保留，重写操作和取证规则 |
-| yanshi-align、yanshi-split、yanshi-implement、yanshi-self-test | 删除；由宿主和项目原有能力完成 |
-| yanshi-accept、yanshi-handoff | 合并到审查交接与 E2E 结果记录 |
-| yanshi-retro | 删除独立入口；E2E 的 SOP 模板承接稳定路径沉淀 |
+| yanshi | 保留名称，改为日常时刻路由 |
+| yanshi-challenge | 保留名称，收窄成一句对抗性审查小命令 |
+| yanshi-e2e | 合入 yanshi-check 的真实业务验收资料 |
+| yanshi-review | 合入 yanshi-check 的提交前审查 |
 
-保留五个思维快捷键，补充每个方法的输入、具体反例与可检查输出。E2E 保留契约预期、独立回读、UI 边界与 P/F/B/U，另列成功耗时，防止快速失败造成速度优势的错觉。
+新增 yanshi-think、yanshi-build、yanshi-debug、yanshi-check、yanshi-handoff、yanshi-retro、yanshi-first、yanshi-trim、yanshi-ablate、yanshi-boundary。v2 曾同名的 handoff/retro 必须整体替换，不混用旧正文。
 
-运行时删除出处和补充设计标记，修复残句、重复标点与不存在的外部路径。仅入口和 E2E 开启隐式触发。全部调用改为读取真实存在的文件，不要求专有 Skill 工具。
+在已有仓库中应用时，先审查差异，再整体替换本套件的 skills 目录，保留无关 Skill。用户安装目录只清理已确认的旧 yanshi 名称；不要执行“删除全部 skills”。保留项目 .yanshi、CONTEXT.md、用户已有宿主指令、许可证及现有图片。
 
-同步中英文 README、llms.txt、安装名称与 Node 要求。MIT 和 Logo 路径保留；视觉文档缩为资产维护说明，不再混入旧工作流。增加包检查与故障注入回归，验证范围单独记录，不声称已有真实业务收益。
+本包只携带 README 所需的原有两张小 Logo；仓库其他图片不改名、不要求删除。完整文本和这两张图片可单独解压使用。setup.py 默认预览、同名拒绝覆盖，不替用户迁移或删除旧目录。
 
-## 升级操作
+## 实验稿 v3
 
-备份旧安装，清理八个已删除名称：yanshi-align、yanshi-design、yanshi-split、yanshi-implement、yanshi-self-test、yanshi-accept、yanshi-handoff、yanshi-retro。
-
-新版本的 `skills/` 是完整替换目录。不能只覆盖文件，否则旧 Skill 和旧参考文件仍会被发现。保留其他无关 Skill、原有图片、许可证和用户自有业务记录；本包不执行删除操作。
-
-## v2
-
-曾将单一工作流拆为总控与十个子 Skill，增加 E2E 目标、证据和方案对比模板。v3 保留这些模板的有效规则，移除转发与重复编排。
+四入口聚焦方案反例、E2E 取证和交叉审查。已完成部分结构降噪；1.0 不把针对 v2 的“33 处标记”等旧评语当作 v3 新测量。

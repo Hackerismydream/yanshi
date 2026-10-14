@@ -1,0 +1,6 @@
+interface:
+  display_name: "偃师 · 记下来"
+  short_description: "复盘一下，把这次踩的坑记到项目里"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: true

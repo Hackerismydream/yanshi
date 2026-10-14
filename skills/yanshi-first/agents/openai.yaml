@@ -1,0 +1,6 @@
+interface:
+  display_name: "偃师 · 重想问题"
+  short_description: "别沿着这个方案想了，从头分析原因"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,6 @@
+interface:
+  display_name: "偃师 · 排障"
+  short_description: "这个 bug 怎么回事，先帮我查一下"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: true

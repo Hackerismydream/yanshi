@@ -1,0 +1,6 @@
+interface:
+  display_name: "偃师 · 想清楚"
+  short_description: "帮我想想怎么做，先别急着写"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "偃师 · 验一下"
+  short_description: "提交前帮我看一眼，确认真的能用"
+  brand_color: "#365667"
+policy:
+  allow_implicit_invocation: true

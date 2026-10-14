@@ -1,6 +1,0 @@
-interface:
-  display_name: "偃师 · 交叉审查"
-  short_description: "交接契约与变更快照，将业务反例交回主实现者修复并复验"
-  brand_color: "#365667"
-policy:
-  allow_implicit_invocation: false
