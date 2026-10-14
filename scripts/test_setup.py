@@ -115,7 +115,7 @@ class SetupTest(unittest.TestCase):
         for source,dest in plan:self.assertEqual(files(source),files(dest))
         self.assertEqual((self.home/'bak/.claude/skills/yanshi-debug/SKILL.md').read_text(),'local edit\n')
         self.assertTrue(obsolete.is_dir())
-        self.assertEqual(sut.obsolete_dirs(self.home,'both'),[obsolete])
+        self.assertEqual([p.resolve() for p in sut.obsolete_dirs(self.home,'both')],[obsolete.resolve()])
     def test_update_failure_restores_originals(self):
         sut.apply_install(self.home,sut.prepare_install(PACKAGE,self.home,'both'))
         (self.home/'.agents/skills/yanshi/SKILL.md').write_text('mine\n')
